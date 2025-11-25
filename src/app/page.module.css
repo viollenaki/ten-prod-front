@@ -1,6 +1,6 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
+  --background: #f0f2f5; /* было #fafafa */
+  --foreground: #ffffff;
 
   --text-primary: #000;
   --text-secondary: #666;
@@ -17,6 +17,7 @@
   background-color: var(--background);
 }
 
+/* добавила тень и скругление, чтобы блок выглядел как карточка */
 .main {
   display: flex;
   min-height: 100vh;
@@ -27,6 +28,8 @@
   justify-content: space-between;
   background-color: var(--foreground);
   padding: 120px 60px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .intro {
@@ -69,6 +72,7 @@
   font-size: 14px;
 }
 
+/* добавила лёгкую анимацию и тень для кнопок */
 .ctas a {
   display: flex;
   justify-content: center;
@@ -77,10 +81,12 @@
   padding: 0 16px;
   border-radius: 128px;
   border: 1px solid transparent;
-  transition: 0.2s;
+  transition: 0.2s transform ease, 0.2s box-shadow ease, 0.2s background-color ease,
+    0.2s border-color ease;
   cursor: pointer;
   width: fit-content;
   font-weight: 500;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 a.primary {
@@ -93,8 +99,13 @@ a.secondary {
   border-color: var(--button-secondary-border);
 }
 
-/* Enable hover only on non-touch devices */
+/* небольшое приподнятие при ховере на десктопе */
 @media (hover: hover) and (pointer: fine) {
+  .ctas a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+
   a.primary:hover {
     background: var(--button-primary-hover);
     border-color: transparent;
@@ -109,6 +120,8 @@ a.secondary {
 @media (max-width: 600px) {
   .main {
     padding: 48px 24px;
+    min-height: auto;
+    margin: 16px;
   }
 
   .intro {
@@ -128,8 +141,8 @@ a.secondary {
   }
 
   .page {
-    --background: #000;
-    --foreground: #000;
+    --background: #050505;
+    --foreground: #050505;
 
     --text-primary: #ededed;
     --text-secondary: #999;
@@ -137,5 +150,9 @@ a.secondary {
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
     --button-secondary-border: #1a1a1a;
+  }
+
+  .main {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
   }
 }
