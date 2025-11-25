@@ -1,0 +1,10 @@
+.checkout { padding:24px 0; }
+.steps { display:flex; gap:12px; margin-bottom:18px; }
+.step { padding:8px 12px; border-radius:10px; background:#fff; box-shadow:0 4px 12px rgba(16,24,40,0.04); }
+.form { background:#fff; padding:16px; border-radius:12px; box-shadow:0 6px 18px rgba(16,24,40,0.04); }
+.row { display:flex; gap:12px; }
+.map { height:180px; border-radius:8px; background:linear-gradient(180deg,#fff,#f8fafc); display:flex; align-items:center; justify-content:center; color:#9ca3af; }
+.summary { margin-top:12px; }
+.actions { display:flex; gap:8px; margin-top:12px; }
+
+@media (max-width:900px) { .row { flex-direction:column; } }

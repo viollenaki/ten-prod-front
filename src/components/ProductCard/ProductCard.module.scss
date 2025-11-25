@@ -1,0 +1,10 @@
+.card { border-radius:12px; padding:12px; background:#fff; box-shadow:0 6px 18px rgba(16,24,40,0.04); display:flex; flex-direction:column; gap:10px; }
+.thumb { height:110px; background:linear-gradient(180deg,#f8fafc,#fff); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-weight:600; }
+.title { font-weight:700; font-size:1rem; }
+.meta { color:#6b7280; font-size:0.9rem; }
+.priceRow { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.badge { background:rgba(47,168,79,0.1); color:#2fa84f; padding:4px 8px; border-radius:8px; font-weight:700; font-size:0.8rem; }
+.qtyRow { display:flex; gap:8px; align-items:center; }
+.btn { padding:8px 10px; border-radius:8px; border:none; cursor:pointer; }
+.btnAdd { background:var(--color-primary); color:#fff; }
+.small { font-size:0.9rem; color:#374151; }

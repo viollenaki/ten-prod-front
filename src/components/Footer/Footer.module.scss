@@ -1,0 +1,7 @@
+.siteFooter { border-top:1px solid #eef2f7; background: #fff; padding: 20px 0; margin-top: 40px; }
+.footerInner { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.footerLinks { display:flex; gap:12px; flex-wrap:wrap; }
+.footerLinks a { color:var(--muted); text-decoration:none; font-size:0.95rem; }
+.footerCopy { color:var(--muted); font-size:0.9rem; }
+
+@media (max-width:700px) { .footerInner { flex-direction:column; align-items:flex-start; gap:8px; } }
