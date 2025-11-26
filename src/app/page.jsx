@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       <section id="smart-goals" className={styles.section}>
-        <h2>SMART Goals</h2>
+        <h2>Goals</h2>
         <div className={styles.grid3}>
           {smartGoals.map(g => (
             <div className={styles.card} key={g.id}><h4>{g.title}</h4><p>{g.text}</p></div>

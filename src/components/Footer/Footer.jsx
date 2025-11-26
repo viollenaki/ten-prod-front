@@ -14,7 +14,7 @@ export default function Footer() {
           <a href="/auth">Login / Sign up</a>
           <a href="/admin">Admin Login</a>
         </div>
-        <div className={styles.footerCopy}>© {year} Fresh15 — All rights reserved</div>
+        <div className={styles.footerCopy}>© {year} TenProducts — All rights reserved</div>
       </div>
     </footer>
   );
