@@ -22,7 +22,7 @@ export default function StorePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({ 
     category: 'All', 
-    priceRange: [0, 10000], 
+    maxPrice: 10000, 
     farmerOnly: false 
   });
   const [sort, setSort] = useState('popular');
@@ -48,7 +48,7 @@ export default function StorePage() {
   }, []);
 
   const resetFilters = () => {
-      setFilters({ category: 'All', priceRange: [0, 10000], farmerOnly: false });
+      setFilters({ category: 'All', maxPrice: 10000, farmerOnly: false });
       setSearchTerm('');
       setSort('popular');
   };
@@ -147,10 +147,8 @@ export default function StorePage() {
     // Assuming 'supplier' field indicates farmer product
     if (filters.farmerOnly && !p.supplier) return false;
     
-    // Price range (if implemented in sidebar)
-    if (filters.priceRange) {
-        if (p.price < filters.priceRange[0] || p.price > filters.priceRange[1]) return false;
-    }
+    // Price range
+    if (p.price > filters.maxPrice) return false;
 
     // Search term
     if (searchTerm && !p.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
@@ -159,15 +157,10 @@ export default function StorePage() {
   });
 
   // Sorting logic
-  // Note: Array.prototype.sort sorts in place, so we copy first if we want to be pure, 
-  // but here filtered is a new array from .filter() so it's safe-ish.
   if (sort === 'price_asc') {
       filtered.sort((a, b) => a.price - b.price);
   } else if (sort === 'time') {
-      // mock time
       filtered.sort((a, b) => (a.time || 15) - (b.time || 15));
-  } else {
-      // popular - default (maybe by id or whatever)
   }
 
   const subtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
@@ -177,7 +170,7 @@ export default function StorePage() {
 
   return (
     <div className={styles.storePage}>
-      <div className={`${styles.layoutTop} container`}>
+      <div className={styles.topArea}>
         <div className={styles.searchRow}>
           <div className={styles.searchWrap}>
             <input 
@@ -188,27 +181,18 @@ export default function StorePage() {
                 onChange={(e)=>setSearchTerm(e.target.value)} 
             />
           </div>
-
-          <select 
-            className={styles.catSelect} 
-            value={filters.category} 
-            onChange={(e)=>setFilters(f=>({ ...f, category: e.target.value }))} 
-            aria-label="Select category"
-          >
-            {categories.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
         </div>
 
-        <div className={styles.layout}>
-          <aside className={styles.leftCol}>
-            <FiltersSidebar 
-                categories={categories} 
-                filters={filters} 
-                setFilters={setFilters} 
-                resetFilters={resetFilters} 
-            />
-          </aside>
+        {/* Horizontal Filters Bar */}
+        <FiltersSidebar 
+            categories={categories} 
+            filters={filters} 
+            setFilters={setFilters} 
+            resetFilters={resetFilters} 
+        />
+      </div>
 
+      <div className={styles.layout}>
           <main className={styles.mainCol}>
             <div className={styles.toolbar}>
               <div className={styles.results}>Showing {filtered.length} products</div>
@@ -228,7 +212,7 @@ export default function StorePage() {
                     key={p.id} 
                     product={{
                         ...p,
-                        // Adapter fields if needed
+                        // Adapter fields
                         category: p.category?.name || 'General',
                         unit: 'pc',
                         time: 15,
@@ -249,7 +233,6 @@ export default function StorePage() {
             </div>
           </main>
           
-          {/* Optional: Right column cart if you want to keep it on desktop alongside FloatingCartBar */}
            <aside className={styles.cart}>
             <h3>Cart</h3>
             {!isLoggedIn && <div style={{marginBottom:10}}><a href="/auth" style={{color:'var(--color-primary)'}}>Log in</a> to manage cart</div>}
@@ -284,8 +267,6 @@ export default function StorePage() {
                 )}
             </div>
             </aside>
-        </div>
-
       </div>
 
       <ProductModal product={preview.product} open={preview.open} onClose={()=>setPreview({ open:false, product:null })} onAdd={(p)=>{ addToCart(p); setPreview({ open:false, product:null }); }} />

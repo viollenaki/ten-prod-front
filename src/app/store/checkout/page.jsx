@@ -81,31 +81,40 @@ export default function CheckoutPage() {
         <div className={styles.form}>
           <h3>Delivery address</h3>
           <div className={styles.row}>
-            <div style={{flex:1}}>
-              <label>City</label>
-              <input value={address.city} onChange={(e)=>setAddress({...address, city:e.target.value})} className="input" placeholder="St. Petersburg" />
-              <label>Street</label>
-              <input value={address.street} onChange={(e)=>setAddress({...address, street:e.target.value})} className="input" placeholder="Nevsky Prospekt" />
+            <div className={styles.colFlex}>
+              <div className={styles.field}>
+                <label className="label">City</label>
+                <input value={address.city} onChange={(e)=>setAddress({...address, city:e.target.value})} className="input" placeholder="St. Petersburg" />
+              </div>
+              <div className={styles.field}>
+                <label className="label">Street</label>
+                <input value={address.street} onChange={(e)=>setAddress({...address, street:e.target.value})} className="input" placeholder="Nevsky Prospekt" />
+              </div>
             </div>
-            <div style={{width:260}}>
-              <label>House / building</label>
-              <input value={address.house} onChange={(e)=>setAddress({...address, house:e.target.value})} className="input" />
-              <label>Apartment</label>
-              <input value={address.apt} onChange={(e)=>setAddress({...address, apt:e.target.value})} className="input" />
+            <div style={{width:260}} className={styles.colSide}>
+              <div className={styles.field}>
+                <label className="label">House / building</label>
+                <input value={address.house} onChange={(e)=>setAddress({...address, house:e.target.value})} className="input" />
+              </div>
+              <div className={styles.field}>
+                <label className="label">Apartment</label>
+                <input value={address.apt} onChange={(e)=>setAddress({...address, apt:e.target.value})} className="input" />
+              </div>
             </div>
           </div>
           <div style={{marginTop:12}} className={styles.row}>
-            <div className={styles.map}>Map placeholder</div>
-            <div style={{flex:1}}>
-              <div className={styles.summary}><strong>Order summary</strong>
-                <div>Items: {cart.length}</div>
-                <div>Subtotal: ${subtotal}</div>
+            <div className={styles.map + ' ' + styles.colFlex}>Map placeholder</div>
+            <div className={styles.colSide}>
+              <div className={styles.summary}>
+                <strong>Order summary</strong>
+                <div className={styles.totRow}><div>Items:</div><div>{cart.length}</div></div>
+                <div className={styles.totRow}><div>Subtotal:</div><div className={styles.totValue}>${subtotal}</div></div>
               </div>
             </div>
           </div>
           <div className={styles.actions}>
-            <button className="btn btn-primary" onClick={()=>setStep(2)}>Continue to Payment</button>
-            <a href="/store" className="btn btn-ghost">Back to catalog</a>
+            <button className={styles.btnPrimary} onClick={()=>setStep(2)}>Continue to Payment</button>
+            <a href="/store" className={styles.btnGhost}>Back to catalog</a>
           </div>
         </div>
       )}
@@ -113,41 +122,50 @@ export default function CheckoutPage() {
       {step === 2 && (
         <div className={styles.form}>
           <h3>Payment method</h3>
-          <div style={{display:'flex', flexDirection:'column', gap:8}}>
-            <label><input type="radio" name="pay" checked={payment==='cash'} onChange={()=>setPayment('cash')} /> Cash to courier</label>
-            <label><input type="radio" name="pay" checked={payment==='card'} onChange={()=>setPayment('card')} /> Card to courier</label>
-            <label><input type="radio" name="pay" checked={payment==='online'} onChange={()=>setPayment('online')} /> Online payment (placeholder)</label>
+          <div className={styles.radioGroup}>
+            <label className={styles.radioLabel}>
+                <input type="radio" name="pay" checked={payment==='cash'} onChange={()=>setPayment('cash')} /> 
+                <span>Cash to courier</span>
+            </label>
+            <label className={styles.radioLabel}>
+                <input type="radio" name="pay" checked={payment==='card'} onChange={()=>setPayment('card')} /> 
+                <span>Card to courier</span>
+            </label>
+            <label className={styles.radioLabel}>
+                <input type="radio" name="pay" checked={payment==='online'} onChange={()=>setPayment('online')} /> 
+                <span>Online payment (placeholder)</span>
+            </label>
           </div>
 
           {payment === 'cash' && (
-            <div style={{marginTop:8}}>
-              <label>Need change from:</label>
+            <div className={styles.mt8}>
+              <label className="label">Need change from:</label>
               <input className="input" placeholder="e.g. $1000" />
             </div>
           )}
 
           <div className={styles.summary}>
-            <div style={{display:'flex', justifyContent:'space-between'}}><div>Subtotal</div><div>${subtotal}</div></div>
-            <div style={{display:'flex', justifyContent:'space-between'}}><div>Delivery</div><div>${deliveryFee}</div></div>
-            <div style={{display:'flex', justifyContent:'space-between', fontWeight:700}}><div>Total</div><div>${subtotal + deliveryFee}</div></div>
+            <div className={styles.totRow}><div>Subtotal</div><div>${subtotal}</div></div>
+            <div className={styles.totRow}><div>Delivery</div><div>${deliveryFee}</div></div>
+            <div className={`${styles.totRow} ${styles.totStrong}`}><div>Total</div><div>${subtotal + deliveryFee}</div></div>
           </div>
 
           <div className={styles.actions}>
-            <button className="btn btn-primary" onClick={confirmOrder}>Confirm Order</button>
-            <button className="btn btn-ghost" onClick={()=>setStep(1)}>Back</button>
+            <button className={styles.btnPrimary} onClick={confirmOrder}>Confirm Order</button>
+            <button className={styles.btnGhost} onClick={()=>setStep(1)}>Back</button>
           </div>
         </div>
       )}
 
       {step === 3 && orderResult && (
         <div className={styles.form}>
-          <div style={{textAlign:'center', padding:20}}>
-            <div style={{fontSize:48, color:'#10b981'}}>✓</div>
+          <div className={styles.confirmBox}>
+            <div className={styles.bigCheck}>✓</div>
             <h2>Order placed!</h2>
             <p>Order #{orderResult.id} placed! Average delivery time ~15 minutes.</p>
-            <div style={{marginTop:12}}>
-              <a href="/store" className="btn btn-primary">Back to catalog</a>
-              {/* <a href="#" className="btn btn-ghost" style={{marginLeft:8}}>Track order</a> */}
+            <div className={styles.actions} style={{justifyContent:'center'}}>
+              <a href="/store" className={styles.btnPrimary}>Back to catalog</a>
+              {/* <a href="#" className={styles.btnGhost}>Track order</a> */}
             </div>
           </div>
         </div>

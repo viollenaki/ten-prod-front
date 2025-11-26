@@ -4,42 +4,51 @@ import React from 'react';
 import styles from './FiltersSidebar.module.scss';
 import { formatSom } from '../../utils/formatCurrency';
 
-// FiltersSidebar - presentational filters + simple UI-only controls
+// FiltersSidebar - now horizontal bar
 export default function FiltersSidebar({ categories = [], filters, setFilters, resetFilters }) {
   const maxPrice = 500; // UI-only slider max
 
   return (
     <aside className={styles.sidebar} aria-label="Filters">
-      <div className={styles.header}>Filters</div>
-
-      <div className={styles.group}>
-        <input type="search" placeholder="Search products" value={filters.query} onChange={(e)=>setFilters(f=>({ ...f, query: e.target.value }))} className={styles.search} aria-label="Search products" />
-      </div>
-
-      <div className={styles.group}>
-        <div className={styles.label}>Category</div>
-        <div className={styles.chips} role="list">
-          {categories.map(c => (
-            <button key={c} className={`${styles.chip} ${c === filters.category ? styles.active : ''}`} onClick={()=>setFilters(f=>({ ...f, category: c }))}>{c}</button>
-          ))}
+      <div className={styles.row}>
+        {/* Categories */}
+        <div className={styles.group}>
+          <label className={styles.label}>Category:</label>
+          <select 
+            className={styles.select} 
+            value={filters.category} 
+            onChange={(e)=>setFilters(f=>({ ...f, category: e.target.value }))}
+          >
+            {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
         </div>
-      </div>
 
-      <div className={styles.group}>
-        <label className={styles.toggle}><input type="checkbox" checked={filters.farmerOnly} onChange={(e)=>setFilters(f=>({ ...f, farmerOnly: e.target.checked }))} /> Farmer products only</label>
-      </div>
+        {/* Farmer Toggle */}
+        <div className={styles.group}>
+            <label className={styles.toggle}>
+                <input type="checkbox" checked={filters.farmerOnly} onChange={(e)=>setFilters(f=>({ ...f, farmerOnly: e.target.checked }))} /> 
+                <span>Farmer products only</span>
+            </label>
+        </div>
 
-      <div className={styles.group}>
-        <label className={styles.toggle}><input type="checkbox" checked={filters.favoritesOnly} onChange={(e)=>setFilters(f=>({ ...f, favoritesOnly: e.target.checked }))} /> Show favorites only</label>
-      </div>
+        {/* Price Slider */}
+        <div className={styles.group} style={{minWidth: 200}}>
+            <label className={styles.label} style={{display:'flex', justifyContent:'space-between'}}>
+                <span>Max Price</span>
+                <span>{formatSom(filters.maxPrice || maxPrice)}</span>
+            </label>
+            <input 
+                type="range" 
+                min="0" 
+                max={maxPrice} 
+                className={styles.range}
+                value={filters.maxPrice || maxPrice} 
+                onChange={(e)=>setFilters(f=>({ ...f, maxPrice: Number(e.target.value) }))} 
+            />
+        </div>
 
-      <div className={styles.group}>
-        <div className={styles.label}>Max price: {formatSom(filters.maxPrice || maxPrice)}</div>
-        <input type="range" min="0" max={maxPrice} value={filters.maxPrice || maxPrice} onChange={(e)=>setFilters(f=>({ ...f, maxPrice: Number(e.target.value) }))} />
-      </div>
-
-      <div className={styles.actions}>
-        <button className={styles.reset} onClick={resetFilters}>Reset filters</button>
+        {/* Reset Button */}
+        <button className={styles.reset} onClick={resetFilters}>Reset</button>
       </div>
     </aside>
   );
