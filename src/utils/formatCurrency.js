@@ -1,8 +1,7 @@
-// Small helper to format amounts in Kyrgyz som (KGS) without fractions
+// Helper to format amounts in Dollars ($)
 export function formatSom(amount) {
   const n = Number(amount) || 0;
-  // Format using space as thousand separator per example (ru-RU uses non-breaking space)
-  return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(Math.round(n)) + ' сом';
+  return '$' + Math.round(n);
 }
 
 export default formatSom;
