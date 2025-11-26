@@ -3,6 +3,10 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import FiltersSidebar from '../../components/FiltersSidebar/FiltersSidebar';
+import ProductModal from '../../components/ProductModal/ProductModal';
+import FloatingCartBar from '../../components/FloatingCartBar/FloatingCartBar';
+import { formatSom } from '../../utils/formatCurrency';
 import styles from './page.module.scss';
 import { api } from '../../utils/api';
 
@@ -127,26 +131,52 @@ export default function StorePage() {
     return true;
   });
 
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const delivery = cart.length ? 79 : 0;
+  const subtotal = cart.reduce((s, i) => s + (i.price || 0) * (i.qty || 1), 0);
 
   if (loading) return <div className="container" style={{padding:40}}>Loading store...</div>;
 
   return (
     <div className={styles.storePage}>
-      <div className={styles.layout + ' container'}>
-        <aside className={styles.filters}>
-          <div className={styles['filter-group']}>
-            <input className={styles.search} placeholder="Search products" value={query} onChange={(e) => setQuery(e.target.value)} />
+      <div className={`${styles.layoutTop} container`}>
+        <div className={styles.searchRow}>
+          <div className={styles.searchWrap}>
+            <input className={styles.searchCenter} placeholder="Search products, e.g. apples, milk..." aria-label="Search products" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
           </div>
 
-          <div className={styles['filter-group']}>
-            <div className={styles.categories}>
-              {categories.map(c => (
-                <div key={c} className={`${styles.category} ${c === category ? styles.active : ''}`} onClick={() => setCategory(c)}>{c}</div>
+          <select className={styles.catSelect} value={filters.category} onChange={(e)=>setFilters(f=>({ ...f, category: e.target.value }))} aria-label="Select category">
+            {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+
+        <div className={`${styles.layout} `}>
+          <aside className={styles.leftCol}>
+            <FiltersSidebar categories={categories} filters={filters} setFilters={setFilters} resetFilters={resetFilters} />
+          </aside>
+
+          <main className={styles.mainCol}>
+            <div className={styles.toolbar}>
+              <div className={styles.results}>Showing {filtered.length} products</div>
+              <div className={styles.sortWrap}><label className={styles.sortLabel}>Sort</label>
+                <select value={sort} onChange={(e)=>setSort(e.target.value)}>
+                  <option value="popular">Popular</option>
+                  <option value="price_asc">Price: low → high</option>
+                  <option value="time">Delivery time</option>
+                </select>
+              </div>
+            </div>
+
+            <div className={styles.grid}>
+              {filtered.map(p => (
+                <ProductCard key={p.id} product={p} onAdd={addToCart} onPreview={(pr)=>setPreview({ open:true, product:pr })} isFavorite={favorites.includes(p.id)} onToggleFavorite={(id)=>{
+                  setFavorites(prev => {
+                    const next = prev.includes(id) ? prev.filter(x=>x!==id) : [...prev, id];
+                    try { if (typeof window !== 'undefined') window.localStorage.setItem('favorites', JSON.stringify(next)); } catch {}
+                    return next;
+                  });
+                }} />
               ))}
             </div>
-          </div>
+          </main>
 
           <div className={styles['filter-group']}>
             <label><input type="checkbox" checked={farmerOnly} onChange={(e) => setFarmerOnly(e.target.checked)} /> Has Supplier</label>
@@ -211,6 +241,14 @@ export default function StorePage() {
           </div>
         </aside>
       </div>
+
+      <ProductModal product={preview.product} open={preview.open} onClose={()=>setPreview({ open:false, product:null })} onAdd={(p)=>{ addToCart(p); setPreview({ open:false, product:null }); }} />
+
+      {/* aria-live region for assistive tech (announce cart changes) */}
+      <div className={styles.srOnly} aria-live="polite">{`Cart ${cart.reduce((s,i)=>s+i.qty,0)} items — total ${formatSom(subtotal)}`}</div>
+
+      {/* Floating bottom cart bar */}
+      <FloatingCartBar itemsCount={cart.reduce((s,i)=>s+i.qty,0)} total={subtotal} onCheckout={()=>routerRef.current?.push('/store/checkout')} />
     </div>
   );
 }

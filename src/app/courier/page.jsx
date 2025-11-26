@@ -63,7 +63,7 @@ export default function CourierPage() {
   if (loading) return <div className="container" style={{padding:40}}>Loading courier dashboard...</div>;
 
   return (
-    <div className="container" style={{ padding:24 }}>
+    <div className={`container ${styles.wrap}`}>
       <h1>Courier Dashboard</h1>
       <button onClick={fetchData} className="btn btn-ghost" style={{marginBottom:12}}>Refresh</button>
 

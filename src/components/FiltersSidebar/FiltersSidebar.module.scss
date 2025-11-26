@@ -1,0 +1,13 @@
+.sidebar { background:transparent; border-radius:8px; padding:8px; box-shadow:none; border:1px solid rgba(15,23,42,0.04); }
+.header { font-weight:700; margin-bottom:6px; font-size:14px; }
+.group { margin-bottom:10px; }
+.search { width:100%; padding:8px 10px; border-radius:8px; border:1px solid rgba(15,23,42,0.04); background:#fff; }
+.label { font-weight:600; color:var(--color-muted); margin-bottom:8px; font-size:13px; }
+.chips { display:flex; flex-direction:column; gap:6px; }
+.chip { padding:8px 10px; border-radius:8px; background:transparent; border:1px solid rgba(15,23,42,0.04); text-align:left; cursor:pointer; font-size:14px; }
+.chip.active { background: rgba(11,61,145,0.06); color:var(--primary); border-color: var(--primary); }
+.toggle { display:flex; align-items:center; gap:8px; }
+.actions { margin-top:8px; }
+.reset { background:transparent; border:1px solid var(--primary); padding:8px 14px; border-radius:8px; cursor:pointer; color:var(--primary); }
+
+@media (max-width: 900px) { .sidebar { padding:8px; } }
