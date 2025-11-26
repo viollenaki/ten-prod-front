@@ -39,6 +39,7 @@ export default function Footer() {
           </div>
           <div className={styles.footerCopy}>© {year} TenProduct — All rights reserved</div>
         </div>
+        <div className={styles.footerCopy}>© {year} TenProducts — All rights reserved</div>
       </div>
     </footer>
   );
