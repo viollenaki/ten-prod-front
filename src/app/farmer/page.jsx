@@ -196,7 +196,7 @@ export default function FarmerPage() {
                     <div key={p.id} style={{ padding:12, borderRadius:12, background:'#fff', border:'1px solid #e5e7eb' }}>
                         <div style={{fontWeight:700}}>{p.name}</div>
                         <div style={{color:'#6b7280', fontSize:'0.9em'}}>{p.category?.name}</div>
-                        <div style={{marginTop:8, fontWeight:600}}>{p.price} ₽</div>
+                        <div style={{marginTop:8, fontWeight:600}}>${p.price}</div>
                         <div style={{fontSize:'0.85em', color: p.stock > 10 ? 'green' : 'red'}}>Stock: {p.stock}</div>
                     </div>
                 ))}
@@ -221,7 +221,7 @@ export default function FarmerPage() {
                   
                   <div style={{display:'flex', gap:16}}>
                     <div style={{flex:1}}>
-                        <label style={{display:'block', marginBottom:4, fontWeight:600}}>Price (₽)</label>
+                        <label style={{display:'block', marginBottom:4, fontWeight:600}}>Price ($)</label>
                         <input 
                             className="input" 
                             type="number" 

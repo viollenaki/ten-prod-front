@@ -48,7 +48,7 @@ export default function AdminPage(){
 				</div>
 				<div style={{ flex:1, padding:16, borderRadius:12, background:'#fff', boxShadow:'0 6px 18px rgba(16,24,40,0.04)' }}>
 					<div style={{ color:'#6b7280' }}>Revenue</div>
-					<div style={{ fontSize:24, fontWeight:800 }}>{revenue} ₽</div>
+					<div style={{ fontSize:24, fontWeight:800 }}>${revenue}</div>
 				</div>
 			</div>
 
@@ -68,7 +68,7 @@ export default function AdminPage(){
 							{orders.map(o => (
 								<tr key={o.id}>
 									<td style={{ padding:12 }}>#{o.id}</td>
-									<td style={{ padding:12 }}>{o.total_price} ₽</td>
+									<td style={{ padding:12 }}>${o.total_price}</td>
 									<td style={{ padding:12 }}>
                                         <span style={{
                                             padding:'4px 8px', borderRadius:12, fontSize:'0.85em',

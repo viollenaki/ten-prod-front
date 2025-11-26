@@ -57,7 +57,11 @@ class ApiClient {
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.detail || `Error ${res.status}: ${res.statusText}`);
+        let errorMessage = errorData.detail || `Error ${res.status}: ${res.statusText}`;
+        if (typeof errorMessage === 'object') {
+            errorMessage = JSON.stringify(errorMessage);
+        }
+        throw new Error(errorMessage);
       }
 
       // For 204 No Content
@@ -75,20 +79,24 @@ class ApiClient {
   }
 
   post(endpoint, data, options = {}) {
-    const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
+    const isFormData = (typeof FormData !== 'undefined' && data instanceof FormData);
+    const isUrlSearchParams = (typeof URLSearchParams !== 'undefined' && data instanceof URLSearchParams);
+    
     return this.request(endpoint, {
       ...options,
       method: 'POST',
-      body: isFormData ? data : JSON.stringify(data),
+      body: (isFormData || isUrlSearchParams) ? data : JSON.stringify(data),
     });
   }
 
   put(endpoint, data, options = {}) {
-    const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
+    const isFormData = (typeof FormData !== 'undefined' && data instanceof FormData);
+    const isUrlSearchParams = (typeof URLSearchParams !== 'undefined' && data instanceof URLSearchParams);
+
     return this.request(endpoint, {
       ...options,
       method: 'PUT',
-      body: isFormData ? data : JSON.stringify(data),
+      body: (isFormData || isUrlSearchParams) ? data : JSON.stringify(data),
     });
   }
 

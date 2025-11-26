@@ -81,6 +81,9 @@ export default function Header() {
           {user && user.role === 'admin' && (
               <a href="/admin" className={styles.navLink} style={{color:'var(--color-primary)', fontWeight:600}}>Admin</a>
           )}
+          {user && user.role === 'user' && (
+              <a href="/store/orders" className={styles.navLink}>My Orders</a>
+          )}
         </nav>
 
         <div className={styles.headerActions}>
@@ -110,6 +113,7 @@ export default function Header() {
             {user ? (
                 <>
                     <a className={styles.mobileItem} href={getDashboardLink()}>Dashboard</a>
+                    {user.role === 'user' && <a className={styles.mobileItem} href="/store/orders">My Orders</a>}
                     <button className={styles.mobileItem} onClick={handleLogout} style={{textAlign:'left', color:'red'}}>Log out</button>
                 </>
             ) : (

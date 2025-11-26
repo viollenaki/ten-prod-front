@@ -99,7 +99,7 @@ export default function CheckoutPage() {
             <div style={{flex:1}}>
               <div className={styles.summary}><strong>Order summary</strong>
                 <div>Items: {cart.length}</div>
-                <div>Subtotal: {subtotal} ₽</div>
+                <div>Subtotal: ${subtotal}</div>
               </div>
             </div>
           </div>
@@ -122,14 +122,14 @@ export default function CheckoutPage() {
           {payment === 'cash' && (
             <div style={{marginTop:8}}>
               <label>Need change from:</label>
-              <input className="input" placeholder="e.g. 1000 ₽" />
+              <input className="input" placeholder="e.g. $1000" />
             </div>
           )}
 
           <div className={styles.summary}>
-            <div style={{display:'flex', justifyContent:'space-between'}}><div>Subtotal</div><div>{subtotal} ₽</div></div>
-            <div style={{display:'flex', justifyContent:'space-between'}}><div>Delivery</div><div>{deliveryFee} ₽</div></div>
-            <div style={{display:'flex', justifyContent:'space-between', fontWeight:700}}><div>Total</div><div>{subtotal + deliveryFee} ₽</div></div>
+            <div style={{display:'flex', justifyContent:'space-between'}}><div>Subtotal</div><div>${subtotal}</div></div>
+            <div style={{display:'flex', justifyContent:'space-between'}}><div>Delivery</div><div>${deliveryFee}</div></div>
+            <div style={{display:'flex', justifyContent:'space-between', fontWeight:700}}><div>Total</div><div>${subtotal + deliveryFee}</div></div>
           </div>
 
           <div className={styles.actions}>

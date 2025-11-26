@@ -152,7 +152,7 @@ export default function StorePage() {
             <label><input type="checkbox" checked={farmerOnly} onChange={(e) => setFarmerOnly(e.target.checked)} /> Has Supplier</label>
           </div>
           <div className={styles['filter-group']}>
-            <label><input type="checkbox" checked={under100} onChange={(e) => setUnder100(e.target.checked)} /> Under 100₽</label>
+            <label><input type="checkbox" checked={under100} onChange={(e) => setUnder100(e.target.checked)} /> Under $100</label>
           </div>
         </aside>
 
@@ -179,7 +179,7 @@ export default function StorePage() {
             <div key={item.cartItemId} className={styles.cartItem}>
               <div style={{ flex:1 }}>
                 <div style={{ fontWeight:700 }}>{item.name}</div>
-                <div style={{ color:'#6b7280' }}>{item.price} ₽ × {item.qty}</div>
+                <div style={{ color:'#6b7280' }}>${item.price} × {item.qty}</div>
               </div>
               <div className={styles.qtyCtrl}>
                 <button onClick={() => changeQty(item, -1)}>-</button>
@@ -191,9 +191,9 @@ export default function StorePage() {
           ))}
 
           <div style={{ marginTop:12, borderTop:'1px solid #f3f4f6', paddingTop:12 }}>
-            <div style={{ display:'flex', justifyContent:'space-between' }}><div>Subtotal</div><div>{subtotal} ₽</div></div>
-            <div style={{ display:'flex', justifyContent:'space-between' }}><div>Delivery</div><div>{delivery} ₽</div></div>
-            <div style={{ display:'flex', justifyContent:'space-between', fontWeight:700, marginTop:8 }}><div>Total</div><div>{subtotal + delivery} ₽</div></div>
+            <div style={{ display:'flex', justifyContent:'space-between' }}><div>Subtotal</div><div>${subtotal}</div></div>
+            <div style={{ display:'flex', justifyContent:'space-between' }}><div>Delivery</div><div>${delivery}</div></div>
+            <div style={{ display:'flex', justifyContent:'space-between', fontWeight:700, marginTop:8 }}><div>Total</div><div>${subtotal + delivery}</div></div>
             {isLoggedIn && cart.length > 0 && (
                 <button 
                     onClick={async () => {

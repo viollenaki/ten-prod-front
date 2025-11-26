@@ -76,7 +76,7 @@ export default function CourierPage() {
                 <div key={o.id} style={{ padding:12, borderRadius:10, background:'#fff', boxShadow:'0 6px 18px rgba(16,24,40,0.04)' }}>
                     <div style={{ fontWeight:700 }}>#{o.id}</div>
                     <div style={{ color:'#6b7280' }}>{o.address}</div>
-                    <div style={{ marginTop:8, fontWeight:700 }}>{o.total_price} ₽</div>
+                    <div style={{ marginTop:8, fontWeight:700 }}>${o.total_price}</div>
                     <button onClick={() => acceptOrder(o.id)} className="btn btn-primary" style={{marginTop:8, width:'100%'}}>Accept</button>
                 </div>
                 ))}
