@@ -184,7 +184,7 @@ export default function StorePage() {
           <div className={styles['filter-group']}>
             <label><input type="checkbox" checked={under100} onChange={(e) => setUnder100(e.target.checked)} /> Under $100</label>
           </div>
-        </aside>
+        </div>
 
         <section>
           <div className={styles.grid}>
