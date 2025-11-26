@@ -1,0 +1,4 @@
+.row { display:flex; gap:12px; margin-bottom:18px; }
+.card { flex:1; background:var(--color-surface); padding:16px; border-radius:10px; box-shadow:var(--elevation-1); }
+.label { color:var(--color-muted); }
+.value { font-weight:800; font-size:1.25rem; margin-top:6px; }

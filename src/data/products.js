@@ -1,4 +1,4 @@
-// Mock products for Fresh15
+// Mock products for TenProduct
 const products = [
   {
     id: 'p1',

@@ -1,0 +1,9 @@
+.wrap { padding:24px; }
+.gridList { display:grid; gap:12px; margin-top:12px; }
+.orderCard { padding:12px; border-radius:10px; background:var(--color-surface); box-shadow:var(--elevation-1); display:flex; justify-content:space-between; align-items:center; }
+.orderTitle { font-weight:700; }
+.orderAddr { color:var(--color-muted); }
+.orderMeta { text-align:right; }
+.statusBadge { display:inline-block; padding:6px 10px; border-radius:8px; background:#fff3cd; color:#92400e; }
+.orderMetaAmount { font-weight:700; }
+.orderMetaBadge { margin-top:8px; }

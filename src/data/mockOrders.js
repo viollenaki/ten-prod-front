@@ -1,4 +1,4 @@
-// Mock orders for Fresh15
+// Mock orders for TenProduct
 const mockOrders = [
 	{
 		id: 'o1001',

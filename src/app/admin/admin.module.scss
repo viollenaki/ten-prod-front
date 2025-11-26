@@ -1,0 +1,17 @@
+:root{
+  --card-bg: var(--color-surface);
+  --muted: var(--color-muted);
+}
+
+.containerPad { padding:24px; }
+
+.statsRow { display:flex; gap:12px; margin-top:12px; }
+.statCard { flex:1; padding:16px; border-radius:var(--radius-md); background:var(--card-bg); box-shadow:var(--elevation-1); }
+.statLabel { color:var(--muted); }
+.statValue { font-size:24px; font-weight:800; }
+
+.ordersSection { margin-top:18px; }
+.tableWrap { margin-top:8px; }
+.table { width:100%; border-collapse:collapse; background:var(--card-bg); border-radius:8px; overflow:hidden; }
+.table thead { background:#f8fafc; }
+.table th, .table td { text-align:left; padding:12px; }

@@ -7,4 +7,15 @@
 .summary { margin-top:12px; }
 .actions { display:flex; gap:8px; margin-top:12px; }
 
+.colFlex { flex:1; }
+.colSide { width:260px; }
+.totRow { display:flex; justify-content:space-between; padding:8px 0; }
+.confirmBox { text-align:center; padding:20px; }
+.bigCheck { font-size:48px; color:var(--color-primary); }
+.trackBtn { margin-left:8px; }
+
+.radioGroup { display:flex; flex-direction:column; gap:8px; }
+.mt8 { margin-top:8px; }
+.totStrong { font-weight:700; }
+
 @media (max-width:900px) { .row { flex-direction:column; } }

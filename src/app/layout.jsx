@@ -4,8 +4,8 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 export const metadata = {
-  title: 'Fresh15 — Fresh farm products delivered in 15 minutes',
-  description: 'Fresh farm products delivered fast. Local farmers, smart routing, great prices.',
+  title: 'TenProduct — Fresh farmer products delivered fast',
+  description: 'TenProduct connects local farmers with customers for fast, reliable delivery of fresh produce.',
 };
 
 export default function RootLayout({ children }) {

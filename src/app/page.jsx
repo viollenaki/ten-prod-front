@@ -7,14 +7,14 @@ export default function Home() {
     <main className="container">
       <section className={styles.hero}>
         <div className={styles['hero-left']}>
-          <div className={styles.headline}>Fresh farm products delivered in 15 minutes</div>
-          <div className={styles.sub}>10% cheaper than supermarkets. Real farmers. Smart delivery routing.</div>
+          <div className={styles.headline}>Local farm produce, delivered professionally</div>
+          <div className={styles.sub}>Quality from trusted farmers. Reliable delivery and clear pricing.</div>
           <div className={styles.cta}>
             <a className="btn btn-primary" href="/auth" aria-label="Start ordering">Start Ordering</a>
             <a className="btn btn-ghost" href="#how-it-works" aria-label="How it works">How it works</a>
           </div>
         </div>
-        <div className={styles['hero-right']}>Placeholder image</div>
+        <div className={styles['hero-right']}>{/* TODO: Replace with product photography / hero image */}</div>
       </section>
 
       <section id="how-it-works" className={styles.section}>

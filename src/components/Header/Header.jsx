@@ -30,8 +30,9 @@ export default function Header() {
     <header className={styles.siteHeader}>
       <div className={`container ${styles.headerInner}`}>
         <div className={styles.brand}>
-          <a href="/" className={styles.logo}>Fresh15</a>
-          <span className={styles.tag}>Fresh & Fast</span>
+          {/* TODO: Replace placeholder with official TenProduct SVG logo */}
+          <a href="/" className={styles.logo} aria-label="TenProduct home">TenProduct</a>
+          <span className={styles.tag}>Local produce. Professional delivery.</span>
         </div>
 
         <nav className={styles.siteNav} aria-label="Main navigation">
@@ -42,8 +43,8 @@ export default function Header() {
         </nav>
 
         <div className={styles.headerActions}>
-          <a className={`${styles.authBtn} ${styles.ghost}`} href="/auth" aria-label="Log in">Log in</a>
-          <a className={`${styles.authBtn} ${styles.primary}`} href="/auth" aria-label="Sign up">Sign up</a>
+          <a className={`${styles.authBtn} ${styles.ghost}`} href="/auth" aria-label="Account and login">Account</a>
+          <a className={`${styles.authBtn} ${styles.primary}`} href="/store" aria-label="Start ordering">Start Ordering</a>
         </div>
 
         <button className={styles.hamburger} aria-label="Open menu" onClick={() => setOpen(v => !v)}>
@@ -57,7 +58,7 @@ export default function Header() {
             <button className={styles.mobileItem} onClick={() => handleNav('for-farmers')}>For Farmers</button>
             <button className={styles.mobileItem} onClick={() => handleNav('smart-goals')}>SMART Goals</button>
             <a className={styles.mobileItem} href="/store">Store</a>
-            <a className={styles.mobileItem} href="/auth">Sign up / Log in</a>
+            <a className={styles.mobileItem} href="/auth">Account</a>
           </div>
         )}
       </div>

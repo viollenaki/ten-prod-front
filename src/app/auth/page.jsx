@@ -28,8 +28,8 @@ export default function AuthPage() {
     <div className={styles['auth-page']}>
       <div className={styles['auth-card']}> 
         <div className={styles.left}>
-          <div className={styles.brand}>Fresh15</div>
-          <div className={styles.lead}>Fresh farm products delivered in ~15 minutes.</div>
+          <div className={styles.brand}>TenProduct</div>
+          <div className={styles.lead}>Local farm produce delivered professionally and reliably.</div>
 
           <div className={styles.tabs} role="tablist" aria-label="Auth tabs">
             <button className={`${styles.tab} ${tab === 'login' ? styles.active : ''}`} onClick={() => setTab('login')}>Login</button>
@@ -71,9 +71,9 @@ export default function AuthPage() {
         </div>
 
         <aside className={styles.right}>
-          <h3>Why Fresh15?</h3>
-          <p>Local produce, smart routing, and fast delivery. Sign up to start ordering or join as a courier to help deliver fresh food.</p>
-          <p style={{ marginTop:12, color:'#4b5563' }}>Choose a role and click {tab === 'login' ? 'Log in' : 'Create account'} to simulate navigation.</p>
+          <h3>Why TenProduct?</h3>
+          <p>We connect local farmers with customers through a reliable delivery network and transparent pricing.</p>
+          <p className={styles.note}>Choose a role and click {tab === 'login' ? 'Log in' : 'Create account'} to simulate navigation.</p>
         </aside>
       </div>
     </div>
