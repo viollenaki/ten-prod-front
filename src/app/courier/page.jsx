@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '../../utils/api';
+import styles from './courier.module.scss';
 
 export default function CourierPage() {
   const router = useRouter();

@@ -147,7 +147,7 @@ export default function CheckoutPage() {
             <p>Order #{orderResult.id} placed! Average delivery time ~15 minutes.</p>
             <div style={{marginTop:12}}>
               <a href="/store" className="btn btn-primary">Back to catalog</a>
-              <a href="#" className="btn btn-ghost" style={{marginLeft:8}}>Track order</a>
+              {/* <a href="#" className="btn btn-ghost" style={{marginLeft:8}}>Track order</a> */}
             </div>
           </div>
         </div>
